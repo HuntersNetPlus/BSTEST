@@ -37,21 +37,25 @@ body {
 /* === БЛОКИ ТОВАРОВ === */
 
 /* Первый ряд */
+/* Первый ряд - блок с фото и 3 кнопками */
 .item-row1 {
     background: #2e2e2e;
     border: 4px solid #ffcc00;
     border-radius: 15px;
     width: 100%;
-    height: 35vh;
+    height: 15vh;
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    justify-content: space-between;
+    padding: 5px;
 }
 
 .item-row1 img {
     width: 100%;
-    height: calc(100% - 50px);
+    height: 60%; /* фото занимает верхнюю часть блока */
     object-fit: cover;
+    border-radius: 10px;
 }
 
 .item-row1 select {
@@ -82,6 +86,24 @@ body {
 }
 
 /* BUTTONS */
+
+/* Контейнер для кнопок */
+.buy-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+    height: 35%; /* оставляем место для 3 кнопок */
+}
+
+/* Кнопки внутри первого ряда */
+.item-row1 .buy-btn {
+    flex: 1;
+    padding: 6px 0;
+    font-size: 14px;
+    margin: 0;
+}
+
+    
 .buy-btn {
     margin: 5px 10px 5px 10px;
     width: calc(100% - 20px);
@@ -212,18 +234,17 @@ body {
 <div id="payLoader" style="display:none;">Обработка...</div>
 
 <div id="content">
-    <!-- Первый ряд -->
-    <div class="row">
-        <div class="item-row1">
-            <img src="https://picsum.photos/600/900?random=1" alt="">
-            <select id="qty1">
-                <option value="1">1 шт</option>
-                <option value="2">2 шт</option>
-                <option value="3">3 шт</option>
-            </select>
-            <button class="buy-btn" onclick="openPayment('Большой товар', qty1.value,1)">Купить</button>
+   <!-- Первый ряд -->
+<div class="row">
+    <div class="item-row1">
+        <img src="https://picsum.photos/600/400?random=1" alt="">
+        <div class="buy-buttons">
+            <button class="buy-btn" onclick="openPayment('Большой товар 1', 1, 1)">Купить 1 шт</button>
+            <button class="buy-btn" onclick="openPayment('Большой товар 2', 2, 1)">Купить 2 шт</button>
+            <button class="buy-btn" onclick="openPayment('Большой товар 3', 3, 1)">Купить 3 шт</button>
         </div>
     </div>
+</div>
     <!-- Второй ряд -->
     <div class="row">
         <div class="item-row2">
