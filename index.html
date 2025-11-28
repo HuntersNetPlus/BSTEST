@@ -34,29 +34,28 @@ body {
     margin-bottom: 20px;
 }
 
-/* ITEM BLOCKS */
-.item {
+/* === БЛОКИ ТОВАРОВ === */
+
+/* Первый ряд */
+.item-row1 {
     background: #2e2e2e;
     border: 4px solid #ffcc00;
     border-radius: 15px;
     width: 100%;
-    height: 450px;
+    height: 15vh;
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
-    position: relative;
 }
 
-.item img {
+.item-row1 img {
     width: 100%;
-    height: 100%;
+    height: calc(100% - 50px);
     object-fit: cover;
 }
 
-/* COUNT SELECT */
-.item select {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    z-index: 10;
+.item-row1 select {
+    margin: 5px 10px 0 10px;
     background: #ffcc00;
     border: none;
     font-weight: bold;
@@ -64,27 +63,41 @@ body {
     padding: 4px;
 }
 
+/* Второй ряд */
+.item-row2 {
+    background: #3a3a3a;
+    border: 4px solid #ffaa33;
+    border-radius: 15px;
+    width: 100%;
+    height: 15vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.item-row2 img {
+    width: 100%;
+    height: calc(100% - 40px);
+    object-fit: cover;
+}
+
 /* BUTTONS */
 .buy-btn {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 12px 14px;
+    margin: 5px 10px 5px 10px;
+    width: calc(100% - 20px);
+    padding: 8px 0;
     border: none;
     background: #ffcc00;
     color: black;
     font-weight: bold;
     cursor: pointer;
     border-radius: 10px;
-    width: 80%;
-    font-size: 18px;
     font-family: "Arial Black", Arial, sans-serif;
     overflow: hidden;
     position: relative;
 }
 
-/* Блик только на кнопках */
+/* Блик на кнопках */
 .buy-btn::before {
     content: "";
     position: absolute;
@@ -199,9 +212,9 @@ body {
 <div id="payLoader" style="display:none;">Обработка...</div>
 
 <div id="content">
-    <!-- ROW 1 -->
+    <!-- Первый ряд -->
     <div class="row">
-        <div class="item" id="item1">
+        <div class="item-row1">
             <img src="https://picsum.photos/600/900?random=1" alt="">
             <select id="qty1">
                 <option value="1">1 шт</option>
@@ -211,17 +224,17 @@ body {
             <button class="buy-btn" onclick="openPayment('Большой товар', qty1.value,1)">Купить</button>
         </div>
     </div>
-    <!-- ROW 2 -->
+    <!-- Второй ряд -->
     <div class="row">
-        <div class="item">
+        <div class="item-row2">
             <img src="https://picsum.photos/600/900?random=2" alt="">
             <button class="buy-btn" onclick="openPayment('Товар A',1,2)">Купить</button>
         </div>
-        <div class="item">
+        <div class="item-row2">
             <img src="https://picsum.photos/600/900?random=3" alt="">
             <button class="buy-btn" onclick="openPayment('Товар B',1,3)">Купить</button>
         </div>
-        <div class="item">
+        <div class="item-row2">
             <img src="https://picsum.photos/600/900?random=4" alt="">
             <button class="buy-btn" onclick="openPayment('Товар C',1,4)">Купить</button>
         </div>
@@ -284,3 +297,6 @@ function showRequisites(){
 
 function closePayment(){ paymentScreen.style.display="none"; }
 </script>
+
+</body>
+</html>
