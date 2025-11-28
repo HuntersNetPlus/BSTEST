@@ -34,54 +34,37 @@ body {
     margin-bottom: 20px;
 }
 
-/* === Единый стиль рамок карточек === */
+/* === Единый стиль рамок с градиентом === */
 .item {
-    border: 4px solid; /* граница */
-    border-image-slice: 1;
-    border-image-source: linear-gradient(45deg, #ff0000, #ffcc00); /* двухцветный градиент */
-    border-radius: 50px;
-    background: #2e2e2e;
+    border-radius: 20px;
+    padding: 4px; /* толщина рамки */
+    background: linear-gradient(45deg, #ff0000, #ffcc00);
     overflow: hidden;
     position: relative;
     display: flex;
     flex-direction: column;
 }
 
-/* Изображение внутри карточки */
+/* Контейнер для изображения */
 .item img {
     width: 100%;
+    height: 100%;
     object-fit: cover;
+    border-radius: 16px; /* чуть меньше рамки */
 }
 
-/* === Первый ряд (большой товар) === */
+/* Первый ряд */
 .item-row1 {
-    height: 35vh; /* можно менять отдельно */
+    height: 35vh;
 }
 
-/* Кнопки поверх фото */
-.item-row1 .buy-buttons {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 8px;
-}
-
-/* === Второй ряд (мелкие товары) === */
+/* Второй ряд */
 .item-row2 {
-    height: 25vh; /* можно менять отдельно */
+    height: 25vh;
+    flex: 1;
 }
 
-/* Кнопки второго ряда размещены снизу */
-.item-row2 .buy-btn {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-/* === Единый стиль кнопок === */
+/* Кнопки */
 .buy-btn {
     padding: 6px 12px;
     font-size: 14px;
@@ -118,6 +101,24 @@ body {
 @keyframes shine {
     0% { transform: translateX(-100%) rotate(45deg); }
     100% { transform: translateX(200%) rotate(45deg); }
+}
+
+/* Первый ряд кнопки поверх картинки */
+.item-row1 .buy-buttons {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+}
+
+/* Второй ряд кнопка снизу */
+.item-row2 .buy-btn {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 /* PAYMENT SCREEN */
@@ -160,7 +161,6 @@ body {
     object-fit: cover;
 }
 
-/* PAYMENT SELECT & REQUISITES */
 #paymentMethod {
     width: 100%;
     padding: 10px;
@@ -179,7 +179,6 @@ body {
     color: #fff;
 }
 
-/* PAYMENT BUTTONS */
 #backMenu, #supportBtn {
     margin-top: 10px;
     padding: 12px;
@@ -196,7 +195,6 @@ body {
     position: relative;
 }
 
-/* Блик на кнопках экрана оплаты */
 #backMenu::before,
 #supportBtn::before {
     content: "";
@@ -211,7 +209,6 @@ body {
     transform: translateX(-100%) rotate(45deg);
     animation: shine 2s linear infinite;
 }
-
 </style>
 </head>
 <body>
@@ -305,6 +302,5 @@ function showRequisites(){
 
 function closePayment(){ paymentScreen.style.display="none"; }
 </script>
-
 </body>
 </html>
