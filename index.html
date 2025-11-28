@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Brawl Stars Shop</title>
+    <title>Brawl Stars Skins</title>
     <style>
         body {
             font-family: sans-serif;
@@ -10,45 +10,53 @@
             color: white;
             padding: 20px;
         }
-        .item {
+        .skin {
             background: #2e2e2e;
             padding: 10px;
-            margin: 10px 0;
-            border-radius: 8px;
+            margin: 10px;
+            border-radius: 10px;
+            width: 200px;
+            text-align: center;
+        }
+        img {
+            width: 180px;
+        }
+        .grid {
+            display: flex;
+            flex-wrap: wrap;
         }
     </style>
 </head>
 <body>
 
-<h1>Текущие предложения в магазине Brawl Stars</h1>
-<div id="shop"></div>
+<h1>Скины Brawl Stars</h1>
+<div id="skins" class="grid"></div>
 
 <script>
-async function loadShop() {
-    const container = document.getElementById("shop");
+async function loadSkins() {
+    const container = document.getElementById("skins");
 
     try {
-        const res = await fetch("https://api.bsgo.ir/shop");
+        const res = await fetch("https://api.brawlapi.com/v1/skins");
         const data = await res.json();
 
-        data.offers.forEach(o => {
+        data.list.forEach(skin => {
             const div = document.createElement("div");
-            div.className = "item";
+            div.className = "skin";
             div.innerHTML = `
-                <strong>${o.name || "Без названия"}</strong><br>
-                Цена: ${o.price || "?"}<br>
-                Тип: ${o.type || "?"}
+                <img src="${skin.imageUrl}" alt="">
+                <br>${skin.name}
             `;
             container.appendChild(div);
         });
 
-    } catch (err) {
-        container.innerHTML = "Ошибка загрузки магазина :(";
-        console.error(err);
+    } catch (e) {
+        container.innerHTML = "Ошибка загрузки :(";
+        console.error(e);
     }
 }
 
-loadShop();
+loadSkins();
 </script>
 
 </body>
