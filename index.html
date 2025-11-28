@@ -12,7 +12,7 @@
     }
 
     /* LOADER */
-    #loader {
+    #loader, #payLoader {
         position: fixed;
         inset: 0;
         background: #202020;
@@ -20,9 +20,8 @@
         justify-content: center;
         align-items: center;
         font-size: 26px;
+        z-index: 1000;
     }
-
-    /* CONTENT */
     #content {
         display: none;
         padding: 15px;
@@ -38,18 +37,24 @@
         background: #333;
         border: 3px solid #ffaa00;
         border-radius: 10px;
-        padding: 10px;
+        padding: 0;
         width: 100%;
-        text-align: center;
+        height: 450px; /* 3 раза выше */
+        overflow: hidden;
+        position: relative;
     }
 
     .item img {
         width: 100%;
-        border-radius: 8px;
+        height: 100%;
+        object-fit: cover;
     }
 
     .buy-btn {
-        margin-top: 10px;
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
         padding: 8px 12px;
         border: none;
         background: #ffcc00;
@@ -57,16 +62,18 @@
         font-weight: bold;
         cursor: pointer;
         border-radius: 6px;
+        width: 80%;
     }
 
     /* PAYMENT SCREEN */
     #paymentScreen {
         position: fixed;
         inset: 0;
-        background: rgba(0,0,0,0.9);
+        background: rgba(0,0,0,0.95);
         display: none;
         justify-content: center;
         align-items: center;
+        padding: 20px;
     }
 
     #paymentBox {
@@ -74,94 +81,81 @@
         padding: 20px;
         border-radius: 10px;
         text-align: center;
-        width: 80%;
-        max-width: 300px;
+        width: 90%;
+        max-width: 350px;
     }
 
-    #closePay {
-        margin-top: 15px;
-        padding: 8px 12px;
+    .pay-item {
+        border: 3px solid #ffaa00;
+        border-radius: 10px;
+        width: 100%;
+        height: 250px;
+        overflow: hidden;
+        margin-bottom: 15px;
+    }
+
+    .pay-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    #closePay, #backMenu, #supportBtn {
+        margin-top: 10px;
+        padding: 10px;
+        width: 100%;
         border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    #backMenu {
+        background: #555;
+        color: white;
+    }
+
+    #supportBtn {
         background: #ff4444;
         color: white;
+    }
+
+    #payDetails {
+        margin: 10px 0;
+        color: #cccccc;
+    }
+
+    #paymentMethod {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+    }
+
+    #requisites {
+        margin-top: 10px;
+        padding: 10px;
+        background: #222;
         border-radius: 6px;
-        cursor: pointer;
+        display: none;
+        text-align: left;
+        color: #bbbbbb;
     }
 </style>
 </head>
 <body>
 
-<!-- LOADER -->
+<!-- MAIN LOADER -->
 <div id="loader">Загрузка...</div>
+
+<!-- PAYMENT LOADER -->
+<div id="payLoader" style="display:none;">Обработка...</div>
 
 <!-- MAIN CONTENT -->
 <div id="content">
 
-    <!-- ROW 1 (1 товар) -->
+    <!-- ROW 1 -->
     <div class="row">
-        <div class="item" style="border-color:#ffffff;">
-            <img src="https://via.placeholder.com/300x180" alt="">
-            <div style="margin-top:10px;">
-                <select id="qty1">
-                    <option value="1">1 шт</option>
-                    <option value="2">2 шт</option>
-                    <option value="3">3 шт</option>
-                </select>
-            </div>
-            <button class="buy-btn" onclick="buyItem('Большой товар', document.getElementById('qty1').value)">
-                Купить
-            </button>
-        </div>
-    </div>
-
-    <!-- ROW 2 (3 товара) -->
-    <div class="row">
-        <div class="item">
-            <img src="https://via.placeholder.com/300x180" alt="">
-            <button class="buy-btn" onclick="buyItem('Товар А', 1)">Купить</button>
-        </div>
-        <div class="item">
-            <img src="https://via.placeholder.com/300x180" alt="">
-            <button class="buy-btn" onclick="buyItem('Товар B', 1)">Купить</button>
-        </div>
-        <div class="item">
-            <img src="https://via.placeholder.com/300x180" alt="">
-            <button class="buy-btn" onclick="buyItem('Товар C', 1)">Купить</button>
-        </div>
-    </div>
-</div>
-
-<!-- PAYMENT SCREEN -->
-<div id="paymentScreen">
-    <div id="paymentBox">
-        <h3 id="payTitle">Оплата</h3>
-        <p id="payDetails"></p>
-        <p style="color:#aaaaaa;">Тут будет API оплаты</p>
-        <button id="closePay" onclick="closePayment()">Закрыть</button>
-    </div>
-</div>
-
-<script>
-// ЛОАДЕР (исчезает через 2 секунды)
-setTimeout(() => {
-    document.getElementById("loader").style.display = "none";
-    document.getElementById("content").style.display = "block";
-}, 2000);
-
-// Открытие экрана оплаты
-function buyItem(name, qty) {
-    document.getElementById("payTitle").innerText = "Оплата";
-    document.getElementById("payDetails").innerText =
-        "Товар: " + name + "\nКоличество: " + qty;
-
-    document.getElementById("paymentScreen").style.display = "flex";
-}
-
-// Закрытие оплаты
-function closePayment() {
-    document.getElementById("paymentScreen").style.display = "none";
-}
-</script>
-
-</body>
-</html>
+        <div class="item" id="item1">
+            <img src="https://picsum.photos/600/900?random=1" alt="">
+            <select id="qty1" style="position:absolute;top:10px;left
