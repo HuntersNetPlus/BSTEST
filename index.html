@@ -31,6 +31,7 @@ body {
 .row {
     display: flex;
     gap: 12px;
+    width: 100%;
     margin-bottom: 20px;
 }
 
@@ -38,7 +39,7 @@ body {
 .item {
     border-radius: 8px;
     padding: 4px; /* толщина рамки */
-    background: linear-gradient(45deg, #00FF2F, #ffcc00);
+    background: linear-gradient(45deg, #FFDF38, #FFE04F); /* === ГРАДИЕНТ РАМКИ ТОВАРА === */
     overflow: hidden;
     position: relative;
     display: flex;
@@ -56,6 +57,7 @@ body {
 /* Первый ряд */
 .item-row1 {
     height: 35vh;
+    flex: 1; /* ВАЖНО — растягивает блок на всю ширину */
 }
 
 /* Второй ряд */
@@ -64,7 +66,7 @@ body {
     flex: 1;
 }
 
-/* Кнопки */
+/* Кнопки КУПИТЬ*/
 .buy-btn {
     padding: 6px 12px;
     font-size: 14px;
@@ -72,7 +74,7 @@ body {
     color: black;
     background: #ffcc00;
     border-radius: 8px;
-    border: 4px linear-gradient(45deg, #006FFF, #FF00E6);
+    border: 2px solid #FFDF38;
     cursor: pointer;
     position: relative;
     overflow: hidden;
