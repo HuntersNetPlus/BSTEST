@@ -34,111 +34,70 @@ body {
     margin-bottom: 20px;
 }
 
-/* === БЛОКИ ТОВАРОВ === */
-
-/* Первый ряд */
-/* Первый ряд - блок с фото и 3 кнопками */
-.item-row1 {
-    background: #2e2e2e;
-    border: 4px solid #ffcc00;
-    border-radius: 6px;
-    width: 100%;
-    height: 35vh;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    justify-content: space-between;
-    padding: 5px;
-}
-
-.item-row1 img {
-    width: 100%;
-    height: 60%; /* фото занимает верхнюю часть блока */
-    object-fit: cover;
-    border-radius: 6px;
-}
-
-.item-row1 select {
-    margin: 5px 10px 0 10px;
-    background: #ffcc00;
+/* === Единый стиль рамок карточек === */
+.item {
     border: 4px solid; /* граница */
-    border-image-slice: 1; /* важно для градиента */
-    border-image-source: linear-gradient(45deg, #ff0000, #ffcc00);
-    font-weight: bold;
-    border-radius: 6px;
-    padding: 4px;
-}
-
-/* Второй ряд */
-.item-row2 {
-    background: #3a3a3a;
-    border: 4px solid; /* граница */
-    border-image-slice: 1; /* важно для градиента */
-    border-image-source: linear-gradient(45deg, #ff0000, #ffcc00);
-    border-radius: 15px;
-    width: 100%;
-    height: 25vh;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-}
-
-.item-row2 img {
-    width: 100%;
-    height: calc(100% - 40px);
-    object-fit: cover;
-}
-
-/* BUTTONS */
-
-/* Контейнер для кнопок */
-.buy-buttons {
-    display: flex;
-    justify-content: space-between;
-    gap: 5px;
-    /* не задаем height, пусть блок подстраивается */
-}
-
-/* Кнопки внутри первого ряда */
-.item-row1 .buy-btn {
-    flex: 1;            /* растягиваем по ширине равномерно */
-    height: 35px;       /* фиксированная высота кнопки */
-    font-size: 14px;
-    align-items: center;        /* вертикальное центрирование текста */
-    margin: 0;
-}
-
-    /* Кнопки второго ряда */
-.item-row2 .buy-btn {
-    padding: 0;                 /* убираем лишние паддинги сверху/снизу */
-    height: 100%;               /* или фиксированная высота */
-    display: flex;              /* превращаем кнопку в flex контейнер */
-    align-items: center;        /* вертикальное центрирование текста */
-    justify-content: center;    /* горизонтальное центрирование текста */
-    font-size: 16px;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(45deg, #ff0000, #ffcc00); /* двухцветный градиент */
     border-radius: 10px;
-    border: none;
-    background: #ffaa33;
-    color: black;
-    font-weight: bold;
-    cursor: pointer;
-    position: relative;         /* для блика, если нужен */
-    overflow: hidden;
-}
-    
-.buy-btn {
-    margin: 5px 10px 5px 10px;
-    width: calc(100% - 20px);
-    padding: 8px 0;
-    border: 2px solid #FFEDA3;
-    background: #ffcc00;
-    color: black;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 6px;
-    font-family: "Arial Black", Arial, sans-serif;
+    background: #2e2e2e;
     overflow: hidden;
     position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Изображение внутри карточки */
+.item img {
+    width: 100%;
+    object-fit: cover;
+}
+
+/* === Первый ряд (большой товар) === */
+.item-row1 {
+    height: 35vh; /* можно менять отдельно */
+}
+
+/* Кнопки поверх фото */
+.item-row1 .buy-buttons {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+}
+
+/* === Второй ряд (мелкие товары) === */
+.item-row2 {
+    height: 25vh; /* можно менять отдельно */
+}
+
+/* Кнопки второго ряда размещены снизу */
+.item-row2 .buy-btn {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* === Единый стиль кнопок === */
+.buy-btn {
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: bold;
+    color: black;
+    background: #ffcc00;
+    border-radius: 10px;
+    border: 4px solid;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(45deg, #ff0000, #ffcc00);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Блик на кнопках */
@@ -178,7 +137,9 @@ body {
     border-radius: 15px;
     width: 90%;
     max-width: 360px;
-    border: 4px solid #ffcc00;
+    border: 4px solid;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(45deg, #ff0000, #ffcc00);
     text-align: center;
 }
 
@@ -188,7 +149,9 @@ body {
     height: 250px;
     overflow: hidden;
     margin-bottom: 15px;
-    border: 4px solid #ffcc00;
+    border: 4px solid;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(45deg, #ff0000, #ffcc00);
 }
 
 .pay-item img {
@@ -248,6 +211,7 @@ body {
     transform: translateX(-100%) rotate(45deg);
     animation: shine 2s linear infinite;
 }
+
 </style>
 </head>
 <body>
@@ -256,28 +220,29 @@ body {
 <div id="payLoader" style="display:none;">Обработка...</div>
 
 <div id="content">
-   <!-- Первый ряд -->
-<div class="row">
-    <div class="item-row1">
-        <img src="https://picsum.photos/600/400?random=1" alt="">
-        <div class="buy-buttons">
-            <button class="buy-btn" onclick="openPayment('Большой товар 1', 1, 1)">Купить 1 шт</button>
-            <button class="buy-btn" onclick="openPayment('Большой товар 2', 2, 1)">Купить 2 шт</button>
-            <button class="buy-btn" onclick="openPayment('Большой товар 3', 3, 1)">Купить 3 шт</button>
+    <!-- Первый ряд -->
+    <div class="row">
+        <div class="item item-row1">
+            <img src="https://picsum.photos/600/400?random=1" alt="">
+            <div class="buy-buttons">
+                <button class="buy-btn" onclick="openPayment('Большой товар 1',1,1)">Купить 1 шт</button>
+                <button class="buy-btn" onclick="openPayment('Большой товар 2',2,1)">Купить 2 шт</button>
+                <button class="buy-btn" onclick="openPayment('Большой товар 3',3,1)">Купить 3 шт</button>
+            </div>
         </div>
     </div>
-</div>
+
     <!-- Второй ряд -->
     <div class="row">
-        <div class="item-row2">
+        <div class="item item-row2">
             <img src="https://picsum.photos/600/900?random=2" alt="">
             <button class="buy-btn" onclick="openPayment('Товар A',1,2)">Купить</button>
         </div>
-        <div class="item-row2">
+        <div class="item item-row2">
             <img src="https://picsum.photos/600/900?random=3" alt="">
             <button class="buy-btn" onclick="openPayment('Товар B',1,3)">Купить</button>
         </div>
-        <div class="item-row2">
+        <div class="item item-row2">
             <img src="https://picsum.photos/600/900?random=4" alt="">
             <button class="buy-btn" onclick="openPayment('Товар C',1,4)">Купить</button>
         </div>
