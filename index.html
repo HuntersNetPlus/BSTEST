@@ -158,4 +158,120 @@
     <div class="row">
         <div class="item" id="item1">
             <img src="https://picsum.photos/600/900?random=1" alt="">
-            <select id="qty1" style="position:absolute;top:10px;left
+            <select id="qty1" style="position:absolute;top:10px;left:10px;z-index:10;">
+                <option value="1">1 шт</option>
+                <option value="2">2 шт</option>
+                <option value="3">3 шт</option>
+            </select>
+            <button class="buy-btn" onclick="openPayment('Большой товар', document.getElementById('qty1').value, 1)">Купить</button>
+        </div>
+    </div>
+
+    <!-- ROW 2 (3 товара) -->
+    <div class="row">
+        <div class="item">
+            <img src="https://picsum.photos/600/900?random=2">
+            <button class="buy-btn" onclick="openPayment('Товар A', 1, 2)">Купить</button>
+        </div>
+        <div class="item">
+            <img src="https://picsum.photos/600/900?random=3">
+            <button class="buy-btn" onclick="openPayment('Товар B', 1, 3)">Купить</button>
+        </div>
+        <div class="item">
+            <img src="https://picsum.photos/600/900?random=4">
+            <button class="buy-btn" onclick="openPayment('Товар C', 1, 4)">Купить</button>
+        </div>
+    </div>
+</div>
+
+<!-- PAYMENT SCREEN -->
+<div id="paymentScreen">
+    <div id="paymentBox">
+        
+        <div class="pay-item">
+            <img id="payImg" src="">
+        </div>
+
+        <h3 id="payTitle"></h3>
+        <p id="payDetails"></p>
+
+        <select id="paymentMethod" onchange="showRequisites()">
+            <option value="">Выберите способ оплаты</option>
+            <option value="sber">Сбербанк</option>
+            <option value="tinkoff">Тинькофф</option>
+            <option value="usdt">USDT (TRC20)</option>
+            <option value="qiwi">Qiwi</option>
+            <option value="yoomoney">ЮMoney</option>
+        </select>
+
+        <div id="requisites"></div>
+
+        <button id="backMenu" onclick="closePayment()">Вернуться в меню</button>
+        <button id="supportBtn">Служба поддержки</button>
+    </div>
+</div>
+
+
+<script>
+// RANDOM loader duration
+setTimeout(() => {
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("content").style.display = "block";
+}, 1000 + Math.random() * 2000);
+
+
+// OPEN PAYMENT SCREEN
+function openPayment(name, qty, imgNumber) {
+
+    document.getElementById("payLoader").style.display = "flex";
+
+    setTimeout(() => {
+        document.getElementById("payLoader").style.display = "none";
+
+        document.getElementById("paymentScreen").style.display = "flex";
+        document.getElementById("payTitle").innerText = name;
+        document.getElementById("payDetails").innerText =
+            "Количество: " + qty;
+
+        document.getElementById("payImg").src =
+            "https://picsum.photos/600/900?random=" + imgNumber;
+
+        document.getElementById("paymentMethod").value = "";
+        document.getElementById("requisites").style.display = "none";
+
+    }, 800 + Math.random() * 1000);
+}
+
+
+
+// SHOW PAYMENT DETAILS
+function showRequisites() {
+    const method = document.getElementById("paymentMethod").value;
+    const req = document.getElementById("requisites");
+
+    if (!method) {
+        req.style.display = "none";
+        return;
+    }
+
+    const data = {
+        sber: "Карта Сбербанк: 5536 9141 2280 1333\nПолучатель: Иванов И.И.",
+        tinkoff: "Карта Тинькофф: 4377 7200 1455 2299\nПолучатель: Петров П.П.",
+        usdt: "USDT TRC20: TXabcdef1234567890",
+        qiwi: "Qiwi кошелёк: +79991234567",
+        yoomoney: "ЮMoney: 4100 1234 5678 900"
+    };
+
+    req.innerText = data[method];
+    req.style.display = "block";
+}
+
+
+// CLOSE PAYMENT
+function closePayment() {
+    document.getElementById("paymentScreen").style.display = "none";
+}
+</script>
+
+</body>
+</html>
