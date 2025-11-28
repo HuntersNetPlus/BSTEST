@@ -1,43 +1,166 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>Магазин Brawl Stars</title>
+<title>Магазин</title>
 <style>
-body { font-family: sans-serif; background: #1e1e1e; color: white; }
-.item { background:#2e2e2e; padding:10px; margin:10px 0; border-radius:8px; }
-img { width:150px; }
+    body {
+        margin: 0;
+        background: #202020;
+        font-family: Arial, sans-serif;
+        color: white;
+    }
+
+    /* LOADER */
+    #loader {
+        position: fixed;
+        inset: 0;
+        background: #202020;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 26px;
+    }
+
+    /* CONTENT */
+    #content {
+        display: none;
+        padding: 15px;
+    }
+
+    .row {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 15px;
+    }
+
+    .item {
+        background: #333;
+        border: 3px solid #ffaa00;
+        border-radius: 10px;
+        padding: 10px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .item img {
+        width: 100%;
+        border-radius: 8px;
+    }
+
+    .buy-btn {
+        margin-top: 10px;
+        padding: 8px 12px;
+        border: none;
+        background: #ffcc00;
+        color: black;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 6px;
+    }
+
+    /* PAYMENT SCREEN */
+    #paymentScreen {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.9);
+        display: none;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #paymentBox {
+        background: #303030;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        width: 80%;
+        max-width: 300px;
+    }
+
+    #closePay {
+        margin-top: 15px;
+        padding: 8px 12px;
+        border: none;
+        background: #ff4444;
+        color: white;
+        border-radius: 6px;
+        cursor: pointer;
+    }
 </style>
 </head>
 <body>
 
-<h1>Магазин Brawl Stars</h1>
-<div id="shop"></div>
+<!-- LOADER -->
+<div id="loader">Загрузка...</div>
+
+<!-- MAIN CONTENT -->
+<div id="content">
+
+    <!-- ROW 1 (1 товар) -->
+    <div class="row">
+        <div class="item" style="border-color:#ffffff;">
+            <img src="https://via.placeholder.com/300x180" alt="">
+            <div style="margin-top:10px;">
+                <select id="qty1">
+                    <option value="1">1 шт</option>
+                    <option value="2">2 шт</option>
+                    <option value="3">3 шт</option>
+                </select>
+            </div>
+            <button class="buy-btn" onclick="buyItem('Большой товар', document.getElementById('qty1').value)">
+                Купить
+            </button>
+        </div>
+    </div>
+
+    <!-- ROW 2 (3 товара) -->
+    <div class="row">
+        <div class="item">
+            <img src="https://via.placeholder.com/300x180" alt="">
+            <button class="buy-btn" onclick="buyItem('Товар А', 1)">Купить</button>
+        </div>
+        <div class="item">
+            <img src="https://via.placeholder.com/300x180" alt="">
+            <button class="buy-btn" onclick="buyItem('Товар B', 1)">Купить</button>
+        </div>
+        <div class="item">
+            <img src="https://via.placeholder.com/300x180" alt="">
+            <button class="buy-btn" onclick="buyItem('Товар C', 1)">Купить</button>
+        </div>
+    </div>
+</div>
+
+<!-- PAYMENT SCREEN -->
+<div id="paymentScreen">
+    <div id="paymentBox">
+        <h3 id="payTitle">Оплата</h3>
+        <p id="payDetails"></p>
+        <p style="color:#aaaaaa;">Тут будет API оплаты</p>
+        <button id="closePay" onclick="closePayment()">Закрыть</button>
+    </div>
+</div>
 
 <script>
-async function load() {
-    const container = document.getElementById("shop");
+// ЛОАДЕР (исчезает через 2 секунды)
+setTimeout(() => {
+    document.getElementById("loader").style.display = "none";
+    document.getElementById("content").style.display = "block";
+}, 2000);
 
-    try {
-        const res = await fetch("shop.json");
-        const items = await res.json();
+// Открытие экрана оплаты
+function buyItem(name, qty) {
+    document.getElementById("payTitle").innerText = "Оплата";
+    document.getElementById("payDetails").innerText =
+        "Товар: " + name + "\nКоличество: " + qty;
 
-        items.forEach(o => {
-            container.innerHTML += `
-                <div class="item">
-                    <img src="${o.image}">
-                    <h3>${o.name}</h3>
-                    <p>Цена: ${o.price}</p>
-                </div>
-            `;
-        });
-
-    } catch (e) {
-        container.innerHTML = "Ошибка загрузки файла shop.json";
-    }
+    document.getElementById("paymentScreen").style.display = "flex";
 }
 
-load();
+// Закрытие оплаты
+function closePayment() {
+    document.getElementById("paymentScreen").style.display = "none";
+}
 </script>
 
 </body>
