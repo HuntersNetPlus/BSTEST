@@ -2,72 +2,42 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>Магазин</title>
+<title>Brawl Stars Shop</title>
 <style>
 body {
     margin: 0;
-    background: #202020;
-    font-family: Arial, sans-serif;
-    color: white;
+    background: #1c1c1c;
+    font-family: "Arial Black", Arial, sans-serif;
+    color: #fff;
 }
 
-/* === БЛИК ПО ОБВОДКЕ === */
-.shiny-border {
-    position: relative;
-    overflow: hidden;
-}
-
-.shiny-border::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 15px;
-    background: linear-gradient(
-        45deg,
-        rgba(255, 255, 255, 0.03) 0%,
-        rgba(255, 255, 255, 0.3) 50%,
-        rgba(255, 255, 255, 0.03) 100%
-    );
-    -webkit-mask:
-        linear-gradient(#000 0 0) content-box,
-        linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-            mask-composite: exclude;
-    animation: shine 2.8s linear infinite;
-}
-
-@keyframes shine {
-    0% { transform: translate(-150%, -150%) rotate(45deg); }
-    100% { transform: translate(150%, 150%) rotate(45deg); }
-}
-
-/* === LOADER === */
+/* LOADER */
 #loader, #payLoader {
     position: fixed;
     inset: 0;
-    background: #202020;
+    background: #1c1c1c;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 26px;
+    font-size: 28px;
+    font-weight: bold;
     z-index: 1000;
 }
 
-#content {
-    display: none;
-    padding: 15px;
-}
+/* CONTENT */
+#content { display: none; padding: 15px; }
 
-/* === ITEMS === */
+/* ROWS */
 .row {
     display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
+    gap: 12px;
+    margin-bottom: 20px;
 }
 
+/* ITEM BLOCKS */
 .item {
-    background: #333;
+    background: #2e2e2e;
+    border: 4px solid #ffcc00;
     border-radius: 15px;
     width: 100%;
     height: 450px;
@@ -81,24 +51,60 @@ body {
     object-fit: cover;
 }
 
+/* COUNT SELECT */
+.item select {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+    background: #ffcc00;
+    border: none;
+    font-weight: bold;
+    border-radius: 6px;
+    padding: 4px;
+}
+
+/* BUTTONS */
 .buy-btn {
     position: absolute;
     bottom: 10px;
     left: 50%;
     transform: translateX(-50%);
-    padding: 12px 12px;
+    padding: 12px 14px;
     border: none;
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(4px);
-    color: white;
+    background: #ffcc00;
+    color: black;
     font-weight: bold;
     cursor: pointer;
-    border-radius: 12px;
+    border-radius: 10px;
     width: 80%;
     font-size: 18px;
+    font-family: "Arial Black", Arial, sans-serif;
+    overflow: hidden;
+    position: relative;
 }
 
-/* === PAYMENT SCREEN === */
+/* Блик только на кнопках */
+.buy-btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        45deg,
+        rgba(255,255,255,0.1) 0%,
+        rgba(255,255,255,0.5) 50%,
+        rgba(255,255,255,0.1) 100%
+    );
+    transform: translateX(-100%) rotate(45deg);
+    animation: shine 2s linear infinite;
+}
+
+@keyframes shine {
+    0% { transform: translateX(-100%) rotate(45deg); }
+    100% { transform: translateX(200%) rotate(45deg); }
+}
+
+/* PAYMENT SCREEN */
 #paymentScreen {
     position: fixed;
     inset: 0;
@@ -110,11 +116,13 @@ body {
 }
 
 #paymentBox {
-    background: #303030;
+    background: #3a3a3a;
     padding: 20px;
     border-radius: 15px;
     width: 90%;
-    max-width: 350px;
+    max-width: 360px;
+    border: 4px solid #ffcc00;
+    text-align: center;
 }
 
 .pay-item {
@@ -123,6 +131,7 @@ body {
     height: 250px;
     overflow: hidden;
     margin-bottom: 15px;
+    border: 4px solid #ffcc00;
 }
 
 .pay-item img {
@@ -131,88 +140,102 @@ body {
     object-fit: cover;
 }
 
-#backMenu, #supportBtn {
-    margin-top: 10px;
-    padding: 12px;
-    width: 100%;
-    border: none;
-    border-radius: 12px;
-    font-size: 16px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-#backMenu { background: rgba(255,255,255,0.1); }
-#supportBtn { background: rgba(255,70,70,0.25); }
-
+/* PAYMENT SELECT & REQUISITES */
 #paymentMethod {
     width: 100%;
     padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: none;
+    font-weight: bold;
 }
 
 #requisites {
     margin-top: 10px;
     padding: 10px;
-    background: #222;
-    border-radius: 10px;
+    background: #2a2a2a;
+    border-radius: 8px;
     display: none;
-    color: #bbbbbb;
+    color: #fff;
+}
+
+/* PAYMENT BUTTONS */
+#backMenu, #supportBtn {
+    margin-top: 10px;
+    padding: 12px;
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+    background: #ffcc00;
+    color: black;
+    font-family: "Arial Black", Arial, sans-serif;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Блик на кнопках экрана оплаты */
+#backMenu::before,
+#supportBtn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        45deg,
+        rgba(255,255,255,0.1) 0%,
+        rgba(255,255,255,0.5) 50%,
+        rgba(255,255,255,0.1) 100%
+    );
+    transform: translateX(-100%) rotate(45deg);
+    animation: shine 2s linear infinite;
 }
 </style>
 </head>
 <body>
 
-<!-- MAIN LOADER -->
 <div id="loader">Загрузка...</div>
-<!-- PAYMENT LOADER -->
 <div id="payLoader" style="display:none;">Обработка...</div>
 
-<!-- MAIN CONTENT -->
 <div id="content">
-
     <!-- ROW 1 -->
     <div class="row">
-        <div class="item shiny-border" id="item1">
+        <div class="item" id="item1">
             <img src="https://picsum.photos/600/900?random=1" alt="">
-            <select id="qty1" style="position:absolute;top:10px;left:10px;z-index:10;">
+            <select id="qty1">
                 <option value="1">1 шт</option>
                 <option value="2">2 шт</option>
                 <option value="3">3 шт</option>
             </select>
-            <button class="buy-btn shiny-border" onclick="openPayment('Большой товар', qty1.value, 1)">Купить</button>
+            <button class="buy-btn" onclick="openPayment('Большой товар', qty1.value,1)">Купить</button>
         </div>
     </div>
-
     <!-- ROW 2 -->
     <div class="row">
-        <div class="item shiny-border">
-            <img src="https://picsum.photos/600/900?random=2">
-            <button class="buy-btn shiny-border" onclick="openPayment('Товар A', 1, 2)">Купить</button>
+        <div class="item">
+            <img src="https://picsum.photos/600/900?random=2" alt="">
+            <button class="buy-btn" onclick="openPayment('Товар A',1,2)">Купить</button>
         </div>
-
-        <div class="item shiny-border">
-            <img src="https://picsum.photos/600/900?random=3">
-            <button class="buy-btn shiny-border" onclick="openPayment('Товар B', 1, 3)">Купить</button>
+        <div class="item">
+            <img src="https://picsum.photos/600/900?random=3" alt="">
+            <button class="buy-btn" onclick="openPayment('Товар B',1,3)">Купить</button>
         </div>
-
-        <div class="item shiny-border">
-            <img src="https://picsum.photos/600/900?random=4">
-            <button class="buy-btn shiny-border" onclick="openPayment('Товар C', 1, 4)">Купить</button>
+        <div class="item">
+            <img src="https://picsum.photos/600/900?random=4" alt="">
+            <button class="buy-btn" onclick="openPayment('Товар C',1,4)">Купить</button>
         </div>
     </div>
-
 </div>
 
 <!-- PAYMENT SCREEN -->
 <div id="paymentScreen">
-    <div id="paymentBox" class="shiny-border">
-        <div class="pay-item shiny-border">
+    <div id="paymentBox">
+        <div class="pay-item">
             <img id="payImg" src="">
         </div>
-
         <h3 id="payTitle"></h3>
         <p id="payDetails"></p>
-
         <select id="paymentMethod" onchange="showRequisites()">
             <option value="">Выберите способ оплаты</option>
             <option value="sber">Сбербанк</option>
@@ -221,68 +244,43 @@ body {
             <option value="qiwi">Qiwi</option>
             <option value="yoomoney">ЮMoney</option>
         </select>
-
         <div id="requisites"></div>
-
-        <button id="backMenu" class="shiny-border" onclick="closePayment()">Вернуться в меню</button>
-        <button id="supportBtn" class="shiny-border">Служба поддержки</button>
+        <button id="backMenu" onclick="closePayment()">Вернуться в меню</button>
+        <button id="supportBtn">Служба поддержки</button>
     </div>
 </div>
 
 <script>
-// MAIN LOADER
-document.addEventListener("DOMContentLoaded", () => {
-    const delay = 1000 + Math.random() * 2000;
-
-    setTimeout(() => {
-        loader.style.display = "none";
-        content.style.display = "block";
-    }, delay);
+document.addEventListener("DOMContentLoaded", ()=>{
+    setTimeout(()=>{loader.style.display="none"; content.style.display="block";},1000+Math.random()*2000);
 });
 
-// OPEN PAYMENT
-function openPayment(name, qty, imgNumber) {
-    payLoader.style.display = "flex";
-
-    setTimeout(() => {
-        payLoader.style.display = "none";
-        paymentScreen.style.display = "flex";
-
-        payTitle.innerText = name;
-        payDetails.innerText = "Количество: " + qty;
-        payImg.src = "https://picsum.photos/600/900?random=" + imgNumber;
-
-        paymentMethod.value = "";
-        requisites.style.display = "none";
-    }, 700 + Math.random() * 1000);
+function openPayment(name, qty, imgNum){
+    payLoader.style.display="flex";
+    setTimeout(()=>{
+        payLoader.style.display="none";
+        paymentScreen.style.display="flex";
+        payTitle.innerText=name;
+        payDetails.innerText="Количество: "+qty;
+        payImg.src="https://picsum.photos/600/900?random="+imgNum;
+        paymentMethod.value="";
+        requisites.style.display="none";
+    },700+Math.random()*1000);
 }
 
-// PAYMENT REQUISITES
-function showRequisites() {
-    const method = paymentMethod.value;
-
-    if (!method) {
-        requisites.style.display = "none";
-        return;
-    }
-
-    const data = {
-        sber: "Сбербанк: 5536 9141 2280 1333\nПолучатель: Иванов И.И.",
-        tinkoff: "Тинькофф: 4377 7200 1455 2299\nПолучатель: Петров П.П.",
-        usdt: "USDT TRC20: TXabcdef1234567890",
-        qiwi: "Qiwi кошелёк: +79991234567",
-        yoomoney: "ЮMoney: 4100 1234 5678 900"
+function showRequisites(){
+    const method=paymentMethod.value;
+    if(!method){ requisites.style.display="none"; return; }
+    const data={
+        sber:"Сбербанк: 5536 9141 2280 1333\nПолучатель: Иванов И.И.",
+        tinkoff:"Тинькофф: 4377 7200 1455 2299\nПолучатель: Петров П.П.",
+        usdt:"USDT TRC20: TXabcdef1234567890",
+        qiwi:"Qiwi кошелёк: +79991234567",
+        yoomoney:"ЮMoney: 4100 1234 5678 900"
     };
-
-    requisites.innerText = data[method];
-    requisites.style.display = "block";
+    requisites.innerText=data[method];
+    requisites.style.display="block";
 }
 
-// CLOSE PAYMENT
-function closePayment() {
-    paymentScreen.style.display = "none";
-}
+function closePayment(){ paymentScreen.style.display="none"; }
 </script>
-
-</body>
-</html>
