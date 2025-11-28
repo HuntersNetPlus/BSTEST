@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Brawl Stars Shop</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background: #1e1e1e;
+            color: white;
+            padding: 20px;
+        }
+        .item {
+            background: #2e2e2e;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Текущие предложения в магазине Brawl Stars</h1>
+<div id="shop"></div>
+
+<script>
+async function loadShop() {
+    const container = document.getElementById("shop");
+
+    try {
+        const res = await fetch("https://api.bsgo.ir/shop");
+        const data = await res.json();
+
+        data.offers.forEach(o => {
+            const div = document.createElement("div");
+            div.className = "item";
+            div.innerHTML = `
+                <strong>${o.name || "Без названия"}</strong><br>
+                Цена: ${o.price || "?"}<br>
+                Тип: ${o.type || "?"}
+            `;
+            container.appendChild(div);
+        });
+
+    } catch (err) {
+        container.innerHTML = "Ошибка загрузки магазина :(";
+        console.error(err);
+    }
+}
+
+loadShop();
+</script>
+
+</body>
+</html>
