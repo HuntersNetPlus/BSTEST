@@ -64,6 +64,20 @@ background-image: url('https://github.com/LaptopCat/bs-fankit-rehosted/blob/main
     background: black;
 }
 
+
+    .label {
+    position: absolute;
+    top: 0;       /* верхний угол */
+    left: 0;      /* левый угол */
+    background: rgba(128, 128, 128, 0.8); /* серая полупрозрачная */
+    color: white;
+    padding: 4px 8px; /* отступы */
+    font-size: 12px;
+    font-weight: bold;
+    border-bottom-right-radius: 8px; /* скругление угла */
+    z-index: 5; /* чтобы было поверх картинки */
+}
+
 /* GIF ФОН */
 .item .bg-anim {
     position: absolute;
@@ -261,7 +275,7 @@ background-image: url('https://github.com/LaptopCat/bs-fankit-rehosted/blob/main
     <!-- Первый ряд -->
     <div class="row">
         <div class="item item-row1">
-
+ <div class="label">Товар A</div>
             <!-- GIF заполняет блок -->
              <img class="bg-anim" src="https://github.com/LaptopCat/bs-fankit-rehosted/blob/main/game-assets/backdrop_screen.png?raw=true">
 
@@ -312,11 +326,11 @@ background-image: url('https://github.com/LaptopCat/bs-fankit-rehosted/blob/main
 
         <select id="paymentMethod" onchange="showRequisites()">
             <option value="">Выберите способ оплаты</option>
-            <option value="sber">Сбербанк</option>
-            <option value="tinkoff">Тинькофф</option>
-            <option value="usdt">USDT TRC-20</option>
-            <option value="qiwi">Qiwi</option>
-            <option value="yoomoney">ЮMoney</option>
+            <option value="sber">Преимум</option>
+            <option value="tinkoff">Контент</option>
+            <option value="usdt">Rasler (45,46 и тд)</option>
+            <option value="qiwi">Вылизывание манды</option>
+            <option value="yoomoney">оплатить нутом</option>
         </select>
 
         <div id="requisites"></div>
