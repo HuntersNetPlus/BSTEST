@@ -11,9 +11,10 @@ body {
     color: #fff;
 }
 
-    @font-face {
-    font-family: 'Nougat';
-    src: url('Nougat-ExtraBlack.ttf') format('truetype'); /* путь к файлу относительно HTML */
+/* Подключаем шрифт OTF */
+@font-face {
+    font-family: 'Nougat'; /* Имя шрифта, которое будем использовать в CSS */
+    src: url('nougat_cyrillic.otf') format('opentype'); /* путь к файлу относительно HTML */
     font-weight: normal;
     font-style: normal;
 }
@@ -83,7 +84,7 @@ body {
     padding: 10px 14px;
     font-size: 14px;
     font-weight: bold;
-    font-family: 'Nougat', Arial, sans-serif; /* резервные шрифты на случай, если Nougat не загрузился */
+    font-family: 'Nougat', Arial, sans-serif;
     color: black;
     background: #ffcc00;
     border-radius: 10px;
